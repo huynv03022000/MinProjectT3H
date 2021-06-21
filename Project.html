@@ -252,6 +252,7 @@
     }
 
     function showHistory() {
+        document.getElementById('tbody').innerHTML = "";
         var localS = localStorage.getItem("database");
         if (localS != null) {
 
