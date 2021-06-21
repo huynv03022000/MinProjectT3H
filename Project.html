@@ -172,13 +172,7 @@
     showHistory();
 
     var index = 0;
-    var obj = {
-        name,
-        Math,
-        Physics,
-        Chemistry
-    };
-    var content = document.getElementById('tbody').innerHTML;
+    // var content = document.getElementById('tbody').innerHTML;
 
     function showAVG() {
         document.getElementById('tbody').innerHTML = "";
@@ -200,7 +194,6 @@
         if (localS != null) {
             var arr = JSON.parse(localS);
             for (let i = 0; i < arr.length; i++) {
-
                 var content1 = document.getElementById('tbody').innerHTML;
                 let avg = (arr[i].Math + arr[i].Chemistry + arr[i].Physics) / 3;
                 let ind = i + 1;
@@ -228,9 +221,8 @@
         if (name == "" || Math == "" || Physics == "" || Chemistry == "") {
             alert("input cant not Empty");
         } else {
-            arr[index] = obj;
-            index++;
-
+            // arr[index] = obj;
+            // index++;
             setHistory(obj);
             showHistory();
         }
