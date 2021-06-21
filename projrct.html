@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+
+</head>
+<style>
+    .center {
+        width: 30%;
+        height: 430px;
+        border: 1px solid black;
+        margin-left: 35%;
+    }
+    
+    body {
+        margin: 0 auto;
+    }
+    
+    .center .row {
+        margin-top: 15px;
+    }
+    
+    .row h6 {
+        margin-left: 30px;
+    }
+    
+    .btn-primary {
+        margin-top: 20px;
+        height: 50px;
+        width: 100%;
+    }
+    
+    .input-group {
+        margin-right: 35px;
+    }
+    
+    table {
+        margin-top: 50px;
+    }
+    
+    table tr {
+        color: cornsilk;
+        text-align: center;
+        height: 50px;
+        width: 100%;
+    }
+    
+    tbody tr {
+        background-color: #363940;
+    }
+    
+    .active {
+        background-color: cornsilk !important;
+        color: red !important;
+    }
+    
+    .btna {
+        margin-top: 30px;
+        margin-left: 28%;
+    }
+    
+    .btn-success {
+        width: 30%;
+        margin-left: 50px;
+    }
+</style>
+
+<body>
+    <div class="center">
+        <h1 class="text-center">Class Marksheet</h1>
+        <form action="">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h6>Full name </h6>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" required="" name="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Math score </h6>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+
+                            <input type="number" required="" name="math" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h6>Physics score </h6>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="number" required="" name="physics" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h6>Chemistry score </h6>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="number" required="" name="chemistry" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="cal()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <style>
+
+    </style>
+
+    <table class="table">
+        <tr>
+            <th>
+                Index
+                <i class="fas fa-sort-circle"></i>
+            </th>
+            <th>
+                Full name
+            </th>
+            <th>
+                Math score
+            </th>
+            <th>
+                Physics score
+            </th>
+            <th>
+                Chemistry score
+            </th>
+            <th>
+                Average score
+            </th>
+        </tr>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <div class="container btna">
+        <button type="button" class="btn btn-success" onclick="showAVG()">Show AVG score</button>
+        <button type="button" class="btn btn-success" onclick="Detemind()">Detemine good student</button>
+    </div>
+</body>
+<script>
+    showHistory();
+
+    var index = 0;
+    var obj = {
+        name,
+        Math,
+        Physics,
+        Chemistry
+    };
+    var content = document.getElementById('tbody').innerHTML;
+
+    function showAVG() {
+        document.getElementById('tbody').innerHTML = "";
+        var localS = localStorage.getItem("database");
+        if (localS != null) {
+            var arr = JSON.parse(localS);
+            for (let i = 0; i < arr.length; i++) {
+                var content1 = document.getElementById('tbody').innerHTML;
+                let avg = (arr[i].Math + arr[i].Chemistry + arr[i].Physics) / 3;
+                let ind = i + 1;
+                document.getElementById('tbody').innerHTML = content1 + " <tr><td>" + ind + "</td><td>" + arr[i].name + "</td><td>" + arr[i].Math + "</td><td>" + arr[i].Physics + "</td><td>" + arr[i].Chemistry + "</td><td>" + avg + "</td></tr>";
+            }
+        }
+    }
+
+    function Detemind() {
+        document.getElementById('tbody').innerHTML = "";
+        var localS = localStorage.getItem("database");
+        if (localS != null) {
+            var arr = JSON.parse(localS);
+            for (let i = 0; i < arr.length; i++) {
+
+                var content1 = document.getElementById('tbody').innerHTML;
+                let avg = (arr[i].Math + arr[i].Chemistry + arr[i].Physics) / 3;
+                let ind = i + 1;
+                // alert(arr[i].name + arr[i].Math + arr[i].Chemistry + arr[i].Physics);
+                if (avg >= 5) {
+                    document.getElementById('tbody').innerHTML = content1 + " <tr class='active'><td>" + ind + "</td><td>" + arr[i].name + "</td><td>" + arr[i].Math + "</td><td>" + arr[i].Physics + "</td><td>" + arr[i].Chemistry + "</td><td>" + avg + "</td></tr>";
+                }
+                // ...
+            }
+        }
+    }
+
+    function cal() {
+        var content = document.getElementById('tbody').innerHTML;
+        var name = document.getElementsByName("name")[0].value;
+        var Math = parseInt(document.getElementsByName("math")[0].value);
+        var Physics = parseInt(document.getElementsByName("physics")[0].value);
+        var Chemistry = parseInt(document.getElementsByName("chemistry")[0].value);
+        var obj = {
+            name,
+            Math,
+            Physics,
+            Chemistry
+        };
+        if (name == "" || Math == "" || Physics == "" || Chemistry == "") {
+            alert("input cant not Empty");
+        } else {
+            arr[index] = obj;
+            index++;
+
+            setHistory(obj);
+            showHistory();
+        }
+        // for (var i = 0; i < arr.length; i++) {
+        //     var ind = i + 1;
+        //     document.getElementById('tbody').innerHTML = content + " <tr><td>" + ind + "</td><td>" + arr[i].name + "</td><td>" + arr[i].Math + "</td><td>" + arr[i].Physics + "</td><td>" + arr[i].Chemistry + "</td><td>?</td></tr>";
+        //     var name = document.getElementsByName("name")[0].value == "";
+        //     var Math = document.getElementsByName("math")[0].value = "";
+        //     var Physics = document.getElementsByName("physics")[0].value == "";
+        //     var Chemistry = document.getElementsByName("chemistry")[0].value = "";
+        //     // ...
+        // }
+
+        // document.getElementById('tbody').innerHTML = content + " <tr><td>1</td><td>huynv</td><td>5</td><td>5</td><td>5</td><td>5.0</td></tr>";
+    }
+
+
+    function setHistory(obj) {
+        var localS = localStorage.getItem("database");
+        if (localS == null) {
+            localStorage.setItem("database", JSON.stringify([obj]));
+        } else {
+            var current = JSON.parse(localS);
+            var newArray = [...current, obj];
+            localStorage.setItem("database", JSON.stringify(newArray));
+        }
+    }
+
+    function showHistory() {
+        var localS = localStorage.getItem("database");
+        if (localS != null) {
+
+            var array = JSON.parse(localS);
+            for (var i = 0; i < array.length; i++) {
+                var content = document.getElementById('tbody').innerHTML;
+                var ind = i + 1;
+                document.getElementById('tbody').innerHTML = content + " <tr><td>" + ind + "</td><td>" + array[i].name + "</td><td>" + array[i].Math + "</td><td>" + array[i].Physics + "</td><td>" + array[i].Chemistry + "</td><td>?</td></tr>";
+                var name = document.getElementsByName("name")[0].value == "";
+                var Math = document.getElementsByName("math")[0].value = "";
+                var Physics = document.getElementsByName("physics")[0].value == "";
+                var Chemistry = document.getElementsByName("chemistry")[0].value = "";
+            }
+        }
+    }
+</script>
+
+</html>
